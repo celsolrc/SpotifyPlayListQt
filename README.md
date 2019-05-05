@@ -17,3 +17,4 @@ Nesta primera etapa o acesso ao Spotify não está completo e ainda existem algu
 
 # Melhorias futuras
 - Uso de SIGNAL e SLOTS para melhor independencia e segurança no código
+- Melhorar a montagem e formatação dos elementos visuais para que as dimensões dos componentes seja ajustada conforme as dimensões da janela forem alteradas.
