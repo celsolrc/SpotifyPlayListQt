@@ -32,7 +32,6 @@ public:
 
     // Flags
     bool haveLocalInfo() { return m_haveLocalInfo; }
-    bool haveValues() { return (m_Username.length()>0 | m_Password.length()>0); }
 
     // Other Metods
 

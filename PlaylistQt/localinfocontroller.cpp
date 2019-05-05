@@ -12,23 +12,21 @@ bool LocalInfoController::save()
 {
     bool result = false;
 
-    if (haveValues()) {
-        QFile arquivo( D_FILEINFO );
+    QFile arquivo( D_FILEINFO );
 
-        if (arquivo.open(QFile::WriteOnly|QFile::Text)){
-            QTextStream saida(&arquivo);
+    if (arquivo.open(QFile::WriteOnly|QFile::Text)){
+        QTextStream saida(&arquivo);
 
-            saida << D_VERSION_INFO;
-            saida << m_Username;
-            saida << m_Password;
-            saida << m_LastPlayListName;
+        saida << D_VERSION_INFO << "\n";
+        saida << m_Username << "\n";
+        saida << m_Password << "\n";
+        saida << m_LastPlayListName << "\n";
 
-            arquivo.flush();
-            arquivo.close();
+        arquivo.flush();
+        arquivo.close();
 
-            m_haveLocalInfo = true;
-            result = true;
-        }
+        m_haveLocalInfo = true;
+        result = true;
     }
 
     return result;

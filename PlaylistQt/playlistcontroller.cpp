@@ -3,8 +3,6 @@
 #include <QFile>
 #include<QTextStream>
 
-#include <qdebug.h>
-
 PlaylistController::PlaylistController()
 {
     setPlaylistName("noname");
@@ -32,7 +30,7 @@ bool PlaylistController::loadPlaylist()
         {
             QString lineMusic;
 
-            while (entrada.status() == QTextStream::Status::Ok) {
+            while (!entrada.atEnd()) {
                 lineMusic = entrada.readLine();
 
                 if (lineMusic.length()>0)
@@ -62,10 +60,10 @@ bool PlaylistController::savePlaylist()
         if (arquivo.open(QFile::WriteOnly|QFile::Text)){
             QTextStream saida(&arquivo);
 
-            saida << D_VERSION_PLAYLIST;
+            saida << D_VERSION_PLAYLIST << "\n";
 
             for ( const auto& musicLine : m_playlist  ) {
-                saida << musicLine;
+                saida << musicLine << "\n";
             }
 
             arquivo.flush();
