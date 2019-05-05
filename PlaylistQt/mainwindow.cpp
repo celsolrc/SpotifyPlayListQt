@@ -49,7 +49,7 @@ void MainWindow::on_actionSearch_triggered()
 {
     DlgSearchSpotify dlgSearchSpotify;
 
-    dlgSearchSpotify.setControllers( m_localInfoController, m_spotifyController, m_playListController);
+    dlgSearchSpotify.setControllers( m_spotifyController, m_playListController);
     dlgSearchSpotify.exec();
 }
 

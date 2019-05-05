@@ -13,6 +13,7 @@ Nesta primera etapa o acesso ao Spotify não está completo e ainda existem algu
 # Implementações futuras
 - Não está acessando a API do Spotify. Com isso, as "musicas" listadas são textos fixos dentro do código
 - Pelo mesmo motivo acima, não executa nenhuma música
+- Habilitar/Desabilitar opções do menu conforme estado de conexão com o Spotify. No momento todos as opções estão habilitadas.
 
 # Melhorias futuras
 - Uso de SIGNAL e SLOTS para melhor independencia e segurança no código

@@ -33,7 +33,7 @@ public:
     // Flags
     bool haveLocalInfo() { return m_haveLocalInfo; }
 
-    // Other Metods
+    // Other Methods
 
     bool save();
     bool load();

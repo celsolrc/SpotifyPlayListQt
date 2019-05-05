@@ -26,7 +26,7 @@ class PlaylistController
 public:
     PlaylistController();
 
-    // Methods
+    // Playlist Methods
     void newPlaylist() { m_isLoad = false; m_isSaved=false; setPlaylistName("noname"); m_playlist.clear(); updateView(); }
     bool loadPlaylist();
     bool savePlaylist();

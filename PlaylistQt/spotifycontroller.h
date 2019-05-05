@@ -40,15 +40,15 @@ public:
     QString getPassword() { return m_password; }
 
 
+    // Spotify Methods (TODO: under construction)
     void login();
     void logout();
 
+    QStringList search(QString strSearch); // Using mock data
+
+    // Flag
     bool isLogged() { return m_isLogged; }
 
-    QStringList search(QString strSearch);
-
-    void saveLocalInfo();
-    void loadLocalInfo();
 };
 
 #endif // SPOTIFYCONTROLLER_H

@@ -16,6 +16,7 @@ LoginSpotify::~LoginSpotify()
 void LoginSpotify::setLocalInfoController(LocalInfoController* localInfoController) {
     m_localInfoController = localInfoController;
 
+    // Recuperando informações de login armazenadas
     ui->leUsername->setText(m_localInfoController->getUsername());
     ui->lePassword->setText(m_localInfoController->getPassword());
 }

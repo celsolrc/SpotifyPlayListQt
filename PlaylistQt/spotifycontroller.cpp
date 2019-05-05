@@ -16,7 +16,10 @@ void SpotifyController::logout()
 }
 
 QStringList SpotifyController::search(QString strSearch)
-{
+{    
+    // Mock
+    // Sem acesso ao Spotify. Dados fixos
+
     resultSearch.clear();
     resultSearch.append("Musica 1");
     resultSearch.append("Musica 2");
@@ -27,14 +30,4 @@ QStringList SpotifyController::search(QString strSearch)
     resultSearch.append("Musica 7");
 
     return resultSearch;
-}
-
-void SpotifyController::saveLocalInfo()
-{
-
-}
-
-void SpotifyController::loadLocalInfo()
-{
-
 }

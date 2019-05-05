@@ -35,15 +35,14 @@ void DlgSearchSpotify::on_pbInsert_clicked()
 }
 
 
-void DlgSearchSpotify::setControllers(LocalInfoController localInfoController, SpotifyController spotifyController, PlaylistController& playListController) {
+void DlgSearchSpotify::setControllers(SpotifyController spotifyController, PlaylistController& playListController) {
     m_spotifyController = spotifyController;
-    m_localInfoController = localInfoController;
     m_playlistController = &playListController;
 }
 
 void DlgSearchSpotify::on_pbSearch_clicked()
 {
-    m_spotifyController.login();
+    m_spotifyController.login(); //  Forçando "Login" para permitir teste sem logar (Acesso ao Spotify não implementado)
 
     if ( m_spotifyController.isLogged()) {
 
