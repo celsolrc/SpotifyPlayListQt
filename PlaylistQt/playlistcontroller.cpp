@@ -3,7 +3,7 @@
 #include <QFile>
 #include<QTextStream>
 
-PlaylistController::PlaylistController()
+PlaylistController::PlaylistController(QObject *parent) : QObject(parent)
 {
     setPlaylistName("noname");
 }
@@ -79,7 +79,5 @@ bool PlaylistController::savePlaylist()
 }
 
 void PlaylistController::updateView() {
-    m_lwMusicsPlaylist->clear();
-
-    m_lwMusicsPlaylist->addItems(m_playlist);
+    emit updatePlaylist(m_playlist);
 }

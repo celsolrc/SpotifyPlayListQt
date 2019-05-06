@@ -29,6 +29,8 @@ private slots:
     void on_actionSalvar_triggered();
     void on_actionLogout_triggered();
 
+    void on_UpdatePlayList(QStringList playlist);
+
 private:
     Ui::MainWindow *ui;
 
