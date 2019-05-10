@@ -1,5 +1,5 @@
 # PlaylistQT  for Spotify
-##### Versão 0.01
+##### Versão 0.02
 PlaylistQT é um demo para criação de uma playlist com armazenamento local para o Spotify. Tem como finalidade principal somente demonstrar os recursos do Qt e como meta, acessar o Spotify.
 
 Nesta primera versão, o acesso ao Spotify não está funcional e ainda existem alguns detalhes a serem melhorados
@@ -17,6 +17,10 @@ Nesta primera versão, o acesso ao Spotify não está funcional e ainda existem 
 - Pelo mesmo motivo acima, não executa nenhuma música
 - Habilitar/Desabilitar opções do menu conforme estado de conexão com o Spotify. No momento todos as opções estão habilitadas.
 
-# Melhorias futuras
-- Uso de SIGNAL e SLOTS para melhor independencia e segurança no código
-- Melhorar a montagem e formatação dos elementos visuais para que as dimensões dos componentes seja ajustada conforme as dimensões da janela forem alteradas.
+
+
+#### Histórico de mudanças
+###### Versão 0.02
+
+- Inclusão da comunicação entre a classe PlayListController e a MainWindow, atualizando a listview na MaoinWindow conforme o conteudo da playlist for alterado. Comunicação somente implementada para demonstrar o uso de Signal e Slots.
+- Melhora na formatação dos elementos visuais: agora os componentes se ajustam conforme as dimensões da janela são alteradas.
