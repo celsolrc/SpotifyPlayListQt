@@ -13,7 +13,7 @@ Nesta primera versão, o acesso ao Spotify não está funcional e ainda existem 
 
 
 # Implementações futuras
-- Não está acessando a API do Spotify. Com isso, as "musicas" listadas são textos fixos dentro do código
+- Não está acessando a API do Spotify. Com isso, as "músicas" listadas são textos fixos dentro do código
 - Pelo mesmo motivo acima, não executa nenhuma música
 - Habilitar/Desabilitar opções do menu conforme estado de conexão com o Spotify. No momento todos as opções estão habilitadas.
 
@@ -22,5 +22,5 @@ Nesta primera versão, o acesso ao Spotify não está funcional e ainda existem 
 #### Histórico de mudanças
 ###### Versão 0.02
 
-- Inclusão da comunicação entre a classe PlayListController e a MainWindow, atualizando a listview na MaoinWindow conforme o conteudo da playlist for alterado. Comunicação somente implementada para demonstrar o uso de Signal e Slots.
+- Inclusão da comunicação entre a classe PlayListController e a MainWindow (SLOT e signal), fazendo com que a listview da MainWindow  seja atualizada conforme o conteudo da playlist mude. Comunicação somente implementada para demonstrar o uso de Signal e Slots.
 - Melhora na formatação dos elementos visuais: agora os componentes se ajustam conforme as dimensões da janela são alteradas.
