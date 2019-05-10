@@ -14,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     m_localInfoController.load();
-    m_playListController.setPlaylistView( ui->lwPlaylistMusic );
+//    m_playListController.setPlaylistView( ui->lwPlaylistMusic );
+
+    connect(&m_playListController, SIGNAL(updatePlaylist(QStringList)), this, SLOT(on_UpdatePlayList(QStringList)) );
 
     if (m_localInfoController.haveLocalInfo()) {
         m_playListController.setPlaylistName(m_localInfoController.getLastPlayListName());
@@ -58,6 +60,12 @@ void MainWindow::updateViewPlaylist(QStringList playListUpdate ) {
     ui->lwPlaylistMusic ->addItems(playListUpdate);
 }
 
+
+void MainWindow::on_UpdatePlayList(QStringList playlist)
+{
+    ui->lwPlaylistMusic ->clear();
+    ui->lwPlaylistMusic ->addItems(playlist);
+}
 
 void MainWindow::on_actionNova_triggered()
 {
