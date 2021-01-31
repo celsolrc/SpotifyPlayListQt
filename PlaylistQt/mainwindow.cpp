@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "loginspotify.h"
 #include "dlgsearchspotify.h"
 
 #include <QStringList>
@@ -24,6 +23,12 @@ MainWindow::MainWindow(QWidget *parent) :
     } else {
         m_playListController.newPlaylist();
     }
+
+    connect(&m_spotifyController, SIGNAL(onUpdateStatus(QAbstractOAuth::Status)), this, SLOT(authStatusChanged(QAbstractOAuth::Status)) );
+    connect(&m_spotifyController, SIGNAL(onGranted(QString)), this, SLOT(granted(QString)) );
+
+    connect(&m_spotifyController, SIGNAL(onLoadUserInfo(QString)), this, SLOT(loadUserInfo(QString)) );
+    connect(&m_spotifyController, SIGNAL(onLoadUserName(QString)), this, SLOT(loadUserName(QString)) );
 }
 
 MainWindow::~MainWindow()
@@ -35,11 +40,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionLogin_triggered()
 {
-    LoginSpotify loginSpotify;
+    ui->teLog->appendPlainText("Chamou Login");
 
-    loginSpotify.setLocalInfoController(&m_localInfoController);
-    loginSpotify.setModal(true);
-    loginSpotify.exec();
+    m_spotifyController.login();
 }
 
 void MainWindow::on_actionSair_triggered()
@@ -49,9 +52,8 @@ void MainWindow::on_actionSair_triggered()
 
 void MainWindow::on_actionSearch_triggered()
 {
-    DlgSearchSpotify dlgSearchSpotify;
+    DlgSearchSpotify dlgSearchSpotify(m_spotifyController, m_playListController);
 
-    dlgSearchSpotify.setControllers( m_spotifyController, m_playListController);
     dlgSearchSpotify.exec();
 }
 
@@ -103,8 +105,37 @@ void MainWindow::on_actionSalvar_triggered()
 
 void MainWindow::on_actionLogout_triggered()
 {
-    m_localInfoController.setUsername("");
-    m_localInfoController.setPassword("");
-
     m_spotifyController.logout();
+}
+
+void MainWindow::loadUserInfo(QString userInfoLine) {
+    ui->teLog->appendPlainText(userInfoLine);
+}
+
+void MainWindow::loadUserName(QString userName) {
+
+}
+
+void MainWindow::granted (QString token)
+{
+    ui->teLog->appendPlainText("Signal granted received");
+
+    ui->teLog->appendPlainText("Token: " + token);
+
+//    ui->pbInfoUsuario ->setEnabled(true);
+//    ui->pbPlayList->setEnabled(true);
+}
+
+void MainWindow::authStatusChanged(QAbstractOAuth::Status status)
+{
+    QString s;
+    if (status == QAbstractOAuth::Status::Granted)
+        s = "granted";
+
+    if (status == QAbstractOAuth::Status::TemporaryCredentialsReceived) {
+        s = "temp credentials";
+        //oauth2.refreshAccessToken();
+    }
+
+    ui->teLog->appendPlainText("Auth Status changed: " + s +  "\n");
 }

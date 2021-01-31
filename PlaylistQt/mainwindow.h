@@ -31,6 +31,13 @@ private slots:
 
     void on_UpdatePlayList(QStringList playlist);
 
+    void granted(QString token);
+    void authStatusChanged(QAbstractOAuth::Status status);
+
+    void loadUserInfo(QString userInfoLine);
+    void loadUserName(QString userName);
+
+
 private:
     Ui::MainWindow *ui;
 

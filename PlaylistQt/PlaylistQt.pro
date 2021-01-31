@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network networkauth
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         dlgsearchspotify.cpp \
         localinfocontroller.cpp \
-        loginspotify.cpp \
         main.cpp \
         mainwindow.cpp \
         playlistcontroller.cpp \
@@ -36,14 +35,12 @@ SOURCES += \
 HEADERS += \
         dlgsearchspotify.h \
         localinfocontroller.h \
-        loginspotify.h \
         mainwindow.h \
         playlistcontroller.h \
         spotifycontroller.h
 
 FORMS += \
         dlgsearchspotify.ui \
-        loginspotify.ui \
         mainwindow.ui
 
 # Default rules for deployment.

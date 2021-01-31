@@ -18,8 +18,6 @@ bool LocalInfoController::save()
         QTextStream saida(&arquivo);
 
         saida << D_VERSION_INFO << "\n";
-        saida << m_Username << "\n";
-        saida << m_Password << "\n";
         saida << m_LastPlayListName << "\n";
 
         arquivo.flush();
@@ -44,8 +42,6 @@ bool LocalInfoController::load()
 
         if (versao.compare(D_VERSION_INFO)==0)
         {
-            m_Username = entrada.readLine();
-            m_Password = entrada.readLine();
             m_LastPlayListName = entrada.readLine();
 
             m_haveLocalInfo = true;

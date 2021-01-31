@@ -16,10 +16,9 @@ class DlgSearchSpotify : public QDialog
     Q_OBJECT
 
 public:
-    explicit DlgSearchSpotify(QWidget *parent = nullptr);
+    explicit DlgSearchSpotify(SpotifyController& spotifyController, PlaylistController& playlistController, QWidget *parent = nullptr);
     ~DlgSearchSpotify();
 
-    void setControllers(SpotifyController spotifyController, PlaylistController &playListController);
 
 private slots:
 
@@ -27,11 +26,14 @@ private slots:
     void on_pbInsert_clicked();
     void on_pbSearch_clicked();
 
+    void searchError(QString errorMessage);
+    void searchResult(QJsonDocument searchResult);
+
 private:
     Ui::DlgSearchSpotify *ui;
 
-    SpotifyController m_spotifyController;
-    PlaylistController* m_playlistController;
+    SpotifyController& m_spotifyController;
+    PlaylistController& m_playlistController;
 };
 
 #endif // DLGSEARCHSPOTIFY_H
