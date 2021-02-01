@@ -2,11 +2,16 @@
 ##### Versão 1.0
 PlaylistQT é um demo para criação de uma playlist com armazenamento local para o Spotify. Tem como finalidade principal somente demonstrar os recursos do Qt e como meta, acessar o Spotify.
 
+# Requisitos
+- Windows, Linux ou OSX
+- Qt e ambiente de desenvolvimento para C++ devidamente configurado
+- OpenSsl instalado e configurado
 
 # Problemas identificados
 
-- Não é apresentada nenhuma mensagem indicativa em caso de falha na gravação ou leitura de qualquer arquivo (de configuração ou playlists)
-- Não é apresentada nenhuma mensagem de erro através do programa em caso de falha na busca
+- O tratamento de erro está incompleto: 
+-- Não é apresentada nenhuma mensagem indicativa em caso de falha na gravação ou leitura de qualquer arquivo (de configuração ou playlists)
+-- Não é apresentada nenhuma mensagem de erro através do programa em caso de falha na busca
 
 
 
