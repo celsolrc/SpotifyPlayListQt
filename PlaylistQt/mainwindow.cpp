@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "dlgsearchspotify.h"
+#include "views/dlgsearchspotify.h"
 
 #include <QStringList>
 #include <QFileDialog>

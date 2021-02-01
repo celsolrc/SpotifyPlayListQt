@@ -3,11 +3,11 @@
 
 #include <QDialog>
 
-#include <spotifycontroller.h>
-#include <localinfocontroller.h>
-#include <playlistcontroller.h>
+#include "../controllers/spotifycontroller.h"
+#include "../controllers/localinfocontroller.h"
+#include "../controllers/playlistcontroller.h"
 
-#include "track.h"
+#include "../models/track.h"
 
 namespace Ui {
 class DlgSearchSpotify;

@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "localinfocontroller.h"
-#include "spotifycontroller.h"
-#include "playlistcontroller.h"
+#include "controllers/localinfocontroller.h"
+#include "controllers/spotifycontroller.h"
+#include "controllers/playlistcontroller.h"
 
 namespace Ui {
 class MainWindow;

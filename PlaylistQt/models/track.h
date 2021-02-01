@@ -1,7 +1,7 @@
 #ifndef TRACK_H
 #define TRACK_H
 
-#include "jsonutils.h"
+#include "../utils/jsonutils.h"
 
 #include <QDateTime>
 #include <QJsonArray>
