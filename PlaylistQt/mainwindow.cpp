@@ -50,11 +50,6 @@ void MainWindow::on_actionLogin_triggered()
     m_spotifyController.login();
 }
 
-void MainWindow::on_actionSair_triggered()
-{
-    close();
-}
-
 void MainWindow::on_actionSearch_triggered()
 {
     DlgSearchSpotify dlgSearchSpotify(m_spotifyController, m_playListController);

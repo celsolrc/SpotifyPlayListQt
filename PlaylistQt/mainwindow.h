@@ -22,7 +22,6 @@ public:
 
 private slots:
     void on_actionLogin_triggered();
-    void on_actionSair_triggered();
     void on_actionSearch_triggered();
     void on_actionNova_triggered();
     void on_actionAbrir_triggered();
