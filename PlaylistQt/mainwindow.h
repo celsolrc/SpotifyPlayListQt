@@ -27,15 +27,12 @@ private slots:
     void on_actionNova_triggered();
     void on_actionAbrir_triggered();
     void on_actionSalvar_triggered();
-    void on_actionLogout_triggered();
 
     void on_UpdatePlayList(QStringList playlist);
 
-    void granted(QString token);
     void authStatusChanged(QAbstractOAuth::Status status);
 
-    void loadUserInfo(QString userInfoLine);
-    void loadUserName(QString userName);
+    void loadUserScreenName(QString userName);
 
 
 private:
@@ -44,6 +41,8 @@ private:
     LocalInfoController m_localInfoController;
     SpotifyController m_spotifyController;
     PlaylistController m_playListController;
+
+    void updateMenu();
 };
 
 #endif // MAINWINDOW_H

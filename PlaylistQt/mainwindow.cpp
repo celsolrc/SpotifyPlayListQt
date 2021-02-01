@@ -25,10 +25,10 @@ MainWindow::MainWindow(QWidget *parent) :
     }
 
     connect(&m_spotifyController, SIGNAL(onUpdateStatus(QAbstractOAuth::Status)), this, SLOT(authStatusChanged(QAbstractOAuth::Status)) );
-    connect(&m_spotifyController, SIGNAL(onGranted(QString)), this, SLOT(granted(QString)) );
 
-    connect(&m_spotifyController, SIGNAL(onLoadUserInfo(QString)), this, SLOT(loadUserInfo(QString)) );
-    connect(&m_spotifyController, SIGNAL(onLoadUserName(QString)), this, SLOT(loadUserName(QString)) );
+    connect(&m_spotifyController, SIGNAL(onLoadUserScreenName(QString)), this, SLOT(loadUserScreenName(QString)) );
+
+    updateMenu();
 }
 
 MainWindow::~MainWindow()
@@ -38,10 +38,15 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::updateMenu()
+{
+    ui->actionLogin->setEnabled( !m_spotifyController.isLogged());
+    ui->menuPlaylist->setEnabled( m_spotifyController.isLogged());
+    ui->actionSearch->setEnabled( m_spotifyController.isLogged());
+}
+
 void MainWindow::on_actionLogin_triggered()
 {
-    ui->teLog->appendPlainText("Chamou Login");
-
     m_spotifyController.login();
 }
 
@@ -103,39 +108,12 @@ void MainWindow::on_actionSalvar_triggered()
     }
 }
 
-void MainWindow::on_actionLogout_triggered()
-{
-    m_spotifyController.logout();
-}
 
-void MainWindow::loadUserInfo(QString userInfoLine) {
-    ui->teLog->appendPlainText(userInfoLine);
-}
-
-void MainWindow::loadUserName(QString userName) {
-
-}
-
-void MainWindow::granted (QString token)
-{
-    ui->teLog->appendPlainText("Signal granted received");
-
-    ui->teLog->appendPlainText("Token: " + token);
-
-//    ui->pbInfoUsuario ->setEnabled(true);
-//    ui->pbPlayList->setEnabled(true);
+void MainWindow::loadUserScreenName(QString userName) {
+    ui->statusBar->showMessage("Oi, "+userName);
 }
 
 void MainWindow::authStatusChanged(QAbstractOAuth::Status status)
 {
-    QString s;
-    if (status == QAbstractOAuth::Status::Granted)
-        s = "granted";
-
-    if (status == QAbstractOAuth::Status::TemporaryCredentialsReceived) {
-        s = "temp credentials";
-        //oauth2.refreshAccessToken();
-    }
-
-    ui->teLog->appendPlainText("Auth Status changed: " + s +  "\n");
+    updateMenu();
 }

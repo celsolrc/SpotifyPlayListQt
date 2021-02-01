@@ -27,38 +27,34 @@ private:
     QOAuth2AuthorizationCodeFlow spotify;
 
     QString auxAddLabel(QString label, QString value);
-    QString auxAddFlagField(QString valAnterior, bool flag,  QString txt);
     QString auxAddField(QString valAnterior, QString newField, QString separator);
-    QString getType(bool album, bool artist, bool playlist, bool track, bool show, bool episode);
     QString getMarket(QString market);
     QString getQuery(QString query);
 
 public:
 
     void login();
-    void logout();
 
     void getUserInfo();
 
-    void search(QString strSearch, QString strMarket, bool album, bool artist, bool playlist, bool track, bool show, bool episode);
+    void search(QString strSearch, QString strMarket);
 
     // Flag
     bool isLogged() { return m_isLogged; }
 
 private slots:
     void granted();
-
     void authStatusChanged(QAbstractOAuth::Status status);
 
 signals:
     void onUpdateStatus(QAbstractOAuth::Status status);
     void onGranted(QString token);
 
-    void onLoadUserInfo(QString lineUserInfo);
-    void onLoadUserName(QString userName);
+    void onErrorLoadUserScreenName(QString errorMessage);
+    void onLoadUserScreenName(QString userScreenName);
 
     void onSearchError(QString errorMessage);
-    void onSearchResult(QJsonDocument searchResult);
+    void onSearchResult(QJsonObject searchResult);
 };
 
 #endif // SPOTIFYCONTROLLER_H

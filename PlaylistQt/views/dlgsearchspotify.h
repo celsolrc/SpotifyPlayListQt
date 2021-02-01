@@ -7,6 +7,8 @@
 #include <localinfocontroller.h>
 #include <playlistcontroller.h>
 
+#include "track.h"
+
 namespace Ui {
 class DlgSearchSpotify;
 }
@@ -27,10 +29,12 @@ private slots:
     void on_pbSearch_clicked();
 
     void searchError(QString errorMessage);
-    void searchResult(QJsonDocument searchResult);
+    void searchResult(QJsonObject searchResult);
 
 private:
     Ui::DlgSearchSpotify *ui;
+
+    QMap<QString, Track> tracks;
 
     SpotifyController& m_spotifyController;
     PlaylistController& m_playlistController;

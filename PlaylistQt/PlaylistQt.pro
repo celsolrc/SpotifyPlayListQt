@@ -25,22 +25,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        dlgsearchspotify.cpp \
-        localinfocontroller.cpp \
         main.cpp \
         mainwindow.cpp \
-        playlistcontroller.cpp \
-        spotifycontroller.cpp
+        views/dlgsearchspotify.cpp \
+        utils/jsonutils.cpp \
+        controllers/localinfocontroller.cpp \
+        controllers/playlistcontroller.cpp \
+        controllers/spotifycontroller.cpp \
+        models/track.cpp
 
 HEADERS += \
-        dlgsearchspotify.h \
-        localinfocontroller.h \
         mainwindow.h \
-        playlistcontroller.h \
-        spotifycontroller.h
+        views/dlgsearchspotify.h \
+        utils/jsonutils.h \
+        controllers/localinfocontroller.h \
+        controllers/playlistcontroller.h \
+        controllers/spotifycontroller.h \
+        models/track.h
 
 FORMS += \
-        dlgsearchspotify.ui \
+        views/dlgsearchspotify.ui \
         mainwindow.ui
 
 # Default rules for deployment.

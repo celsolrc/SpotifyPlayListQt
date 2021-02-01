@@ -13,21 +13,32 @@ DlgSearchSpotify::DlgSearchSpotify(SpotifyController& spotifyController, Playlis
     ui->setupUi(this);
 
     connect(&m_spotifyController, SIGNAL(onSearchError(QString)), this, SLOT(searchError(QString)) );
-    connect(&m_spotifyController, SIGNAL(onSearchResult(QJsonDocument)), this, SLOT(searchResult(QJsonDocument)) );
+    connect(&m_spotifyController, SIGNAL(onSearchResult(QJsonObject)), this, SLOT(searchResult(QJsonObject)) );
 
     void onSearchError(QString errorMessage);
     void onSearchResult(QJsonDocument searchResult);
-
 }
 
 void DlgSearchSpotify::searchError(QString errorMessage)
 {
-    ui->teLogSearch->appendPlainText(errorMessage);
+    // TODO: colocar mensagem de erro
 }
 
-void DlgSearchSpotify::searchResult(QJsonDocument searchResult)
+void DlgSearchSpotify::searchResult(QJsonObject json)
 {
-    ui->teLogSearch->appendPlainText(searchResult.toJson());
+    // Tracks
+
+    for (auto trackJson : json["tracks"].toObject()["items"].toArray())
+    {
+        Track track(trackJson.toObject());
+
+        tracks[track.name]= track;
+    }
+
+    ui->lwMusics->clear();
+
+    for (auto track = tracks.begin(); track != tracks.end(); ++track)
+        ui->lwMusics->insertItem(0, track->name);
 }
 
 DlgSearchSpotify::~DlgSearchSpotify()
@@ -59,12 +70,6 @@ void DlgSearchSpotify::on_pbSearch_clicked()
     if ( m_spotifyController.isLogged()) {
 
         ui->lwMusics->clear();
-        m_spotifyController.search( ui->leMusicSearch->text(), ui->leMarket->text(),
-                                                            ui->cbAlbum->checkState() == Qt::Checked,
-                                                            ui->cbArtist->checkState() == Qt::Checked,
-                                                            ui->cbPlaylist->checkState() == Qt::Checked,
-                                                            ui->cbTrack->checkState() == Qt::Checked,
-                                                            ui->cbShow->checkState() == Qt::Checked,
-                                                            ui->cbEpisode->checkState() == Qt::Checked);
+        m_spotifyController.search( ui->leMusicSearch->text(), ui->leMarket->text());
     }
 }

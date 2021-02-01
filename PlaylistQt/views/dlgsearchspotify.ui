@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>614</width>
-    <height>463</height>
+    <height>476</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -56,56 +56,6 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QCheckBox" name="cbAlbum">
-       <property name="text">
-        <string>album</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="cbArtist">
-       <property name="text">
-        <string>artist</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="cbPlaylist">
-       <property name="text">
-        <string>Playlist</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QCheckBox" name="cbTrack">
-       <property name="text">
-        <string>Track</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="cbShow">
-       <property name="text">
-        <string>Show</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="cbEpisode">
-       <property name="text">
-        <string>Episode</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <widget class="QListWidget" name="lwMusics">
      <property name="selectionMode">
       <enum>QAbstractItemView::MultiSelection</enum>
@@ -129,9 +79,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QPlainTextEdit" name="teLogSearch"/>
    </item>
   </layout>
  </widget>

@@ -31,11 +31,6 @@ void SpotifyController::login()
     spotify.grant();
 }
 
-void SpotifyController::logout()
-{
-    m_isLogged = false;
-}
-
 QString SpotifyController::auxAddLabel(QString label, QString value)
 {
     QString ret = "";
@@ -46,11 +41,6 @@ QString SpotifyController::auxAddLabel(QString label, QString value)
     }
 
     return ret;
-}
-
-QString SpotifyController::auxAddFlagField(QString valAnterior, bool flag,  QString txt)
-{
-    return auxAddField( valAnterior, (flag? txt: ""),  ",");
 }
 
 QString SpotifyController::auxAddField(QString valAnterior, QString newField, QString separator)
@@ -68,22 +58,6 @@ QString SpotifyController::auxAddField(QString valAnterior, QString newField, QS
     return valAnterior;
 }
 
-QString SpotifyController::getType(bool album, bool artist, bool playlist, bool track, bool show, bool episode)
-{
-    QString ret = "";
-
-    ret = auxAddFlagField(ret, album, "album");
-    ret = auxAddFlagField(ret, artist, "artist");
-    ret = auxAddFlagField(ret, playlist, "playlist");
-    ret = auxAddFlagField(ret, track, "track");
-    ret = auxAddFlagField(ret, show, "show");
-    ret = auxAddFlagField(ret, episode, "episode");
-
-    ret = auxAddLabel("type", ret);
-
-    return ret;
-}
-
 QString SpotifyController::getMarket(QString market)
 {
     return auxAddLabel("market", market);
@@ -94,13 +68,13 @@ QString SpotifyController::getQuery(QString query)
     return auxAddLabel("q", query);
 }
 
-void SpotifyController::search(QString strSearch, QString strMarket, bool album, bool artist, bool playlist, bool track, bool show, bool episode)
+void SpotifyController::search(QString strSearch, QString strMarket)
 {
     if (m_isLogged) {
 
         QString qrySearch = getQuery(strSearch);
         QString qryMarket = getMarket(strMarket);
-        QString qryType = getType(album, artist, playlist, track, show, episode);
+        QString qryType = "type=track";
 
         QString qry = "";
         qry = auxAddField( qry, qrySearch, "&");
@@ -120,43 +94,31 @@ void SpotifyController::search(QString strSearch, QString strMarket, bool album,
             }
             const auto data = reply->readAll();
             const auto document = QJsonDocument::fromJson(data);
+            const auto root = document.object();
 
-            onSearchResult(document);
+            onSearchResult(root);
 
             reply->deleteLater();
         });
     }
 }
 
-
-
-//{
-////    spotify.
-//    // Mock
-//    // Sem acesso ao Spotify. Dados fixos
-
-//    resultSearch.clear();
-//    resultSearch.append("Musica 1");
-//    resultSearch.append("Musica 2");
-//    resultSearch.append("Musica 3");
-//    resultSearch.append("Musica 4");
-//    resultSearch.append("Musica 5");
-//    resultSearch.append("Musica 6");
-//    resultSearch.append("Musica 7");
-
-//    return resultSearch;
-//}
-
-
 void SpotifyController::granted ()
 {
     m_isLogged = true;
 
     emit onGranted(spotify.token());
+
+    getUserInfo();
 }
 
 void SpotifyController::authStatusChanged(QAbstractOAuth::Status status)
 {
+    if ( (status == QAbstractOAuth::Status::Granted) || (status == QAbstractOAuth::Status::TemporaryCredentialsReceived) )
+        m_isLogged = true;
+    else if (status == QAbstractOAuth::Status::NotAuthenticated)
+        m_isLogged = false;
+
     emit onUpdateStatus(status);
 }
 
@@ -164,26 +126,22 @@ void SpotifyController::getUserInfo()
 {
     if (m_isLogged) {
 
-        emit onLoadUserInfo("Loading User Informations");
-
         QUrl u ("https://api.spotify.com/v1/me");
 
         auto reply = spotify.get(u);
 
         connect(reply, &QNetworkReply::finished, [=]() {
             if (reply->error() != QNetworkReply::NoError) {
-                emit onLoadUserInfo(reply->errorString());
+                emit onErrorLoadUserScreenName(reply->errorString());
                 return;
             }
             const auto data = reply->readAll();
-            emit onLoadUserInfo(data);
 
             const auto document = QJsonDocument::fromJson(data);
             const auto root = document.object();
             const auto displayName = root.value("display_name").toString();
 
-            onLoadUserInfo("Username: " + displayName);
-            onLoadUserName(displayName);
+            onLoadUserScreenName(displayName);
 
             reply->deleteLater();
         });
