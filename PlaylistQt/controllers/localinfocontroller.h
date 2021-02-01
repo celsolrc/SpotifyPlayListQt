@@ -3,7 +3,7 @@
 
 #include <QString>
 
-#define D_VERSION_INFO "0.01"
+#define D_VERSION_INFO "0.10"
 #define D_FILEINFO "PlaylistQt.inf"
 
 class LocalInfoController
